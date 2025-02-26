@@ -54,7 +54,7 @@ function App() {
             {/* ✅ Navbar Bootstrap with enhanced UI */}
             <nav className="navbar navbar-expand-lg navbar-dark custom-navbar shadow-sm">
                 <div className="container">
-                    <Link className="navbar-brand fw-bold text-light" to="/">🛒 Kapom Shop</Link>
+                    <Link className="navbar-brand fw-bold text-light" to="/">Kapom Shop</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -66,7 +66,7 @@ function App() {
                                     <li className="nav-item"><Link className="nav-link text-light" to="/products">🛍 Products</Link></li>
                                     <li className="nav-item"><Link className="nav-link text-light" to="/orders">📦 Orders</Link></li>
                                     <li className="nav-item"><Link className="nav-link text-light" to="/payment">💳 Payment</Link></li>
-                                    <li className="nav-item"><Link className="nav-link text-light" to="/cart">🛒 Cart ({cart.reduce((acc, item) => acc + item.Quantity, 0)})</Link></li>
+                                    <li className="nav-item"><Link className="nav-link text-light" to="/cart">🛒 Cart </Link></li>
                                     <li className="nav-item"><Link className="nav-link text-light" to="/order-tracking">🚚 Order Tracking</Link></li>
                                     <li className="nav-item">
                                         <button onClick={handleLogout} className="btn btn-danger btn-sm ms-3">🚪 Logout</button>

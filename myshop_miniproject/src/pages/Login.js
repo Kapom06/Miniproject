@@ -28,13 +28,13 @@ const Login = () => {
                 setError(data.message);
             }
         } catch (error) {
-            setError("❌ Login failed. Try again.");
+            setError("Login failed. Try again.");
         }
     };
 
     return (
         <div style={styles.container}>
-            {/* ✅ CSS Animation */}
+            {/* CSS Animation */}
             <style>
                 {`
                 @keyframes gradientAnimation {

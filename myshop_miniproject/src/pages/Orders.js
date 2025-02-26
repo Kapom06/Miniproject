@@ -27,11 +27,11 @@ const OrdersAndPayment = () => {
             if (response.data.orders.length > 0) {
                 setOrders(response.data.orders);
             } else {
-                setError("❌ No orders found.");
+                setError("No orders found.");
             }
         } catch (err) {
-            console.error("❌ Fetch Orders Error:", err);
-            setError("❌ Failed to fetch orders.");
+            console.error("Fetch Orders Error:", err);
+            setError("Failed to fetch orders.");
         }
     };
 
@@ -46,23 +46,23 @@ const OrdersAndPayment = () => {
                 setOrderDetails(response.data);
                 setError("");
             } else {
-                setError("❌ Order not found.");
+                setError("Order not found.");
                 setOrderDetails(null);
             }
         } catch (err) {
-            console.error("❌ Fetch Order Error:", err);
-            setError("❌ Failed to fetch order details.");
+            console.error("Fetch Order Error:", err);
+            setError("Failed to fetch order details.");
         }
     };
 
     // ✅ ฟังก์ชันชำระเงินและบันทึกลง SQL
     const handlePayment = async () => {
         if (!selectedOrderID) {
-            alert("❌ Please select an Order!");
+            alert("Please select an Order!");
             return;
         }
         if (!paymentMethod) {
-            alert("❌ Please select a payment method!");
+            alert("Please select a payment method!");
             return;
         }
 
@@ -79,10 +79,10 @@ const OrdersAndPayment = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            console.log("✅ Payment Response:", response.data);
+            console.log("Payment Response:", response.data);
 
             if (response.data.status === "success") {
-                alert("✅ Payment Successful!");
+                alert("Payment Successful!");
 
                 // ✅ อัปเดตสถานะออเดอร์เป็น Completed
                 await axios.put(`http://localhost:5000/api/orders/${selectedOrderID}`, { Status: "Completed" }, {
@@ -93,11 +93,11 @@ const OrdersAndPayment = () => {
                 fetchOrders();
                 fetchOrderDetails(selectedOrderID);
             } else {
-                setError("❌ Failed to complete payment.");
+                setError("Failed to complete payment.");
             }
         } catch (err) {
-            console.error("❌ Payment Error:", err);
-            setError("❌ Error processing payment.");
+            console.error("Payment Error:", err);
+            setError("Error processing payment.");
         }
     };
 
@@ -183,7 +183,7 @@ const OrdersAndPayment = () => {
                                     whileTap={{ scale: 0.9 }}
                                     onClick={handlePayment}
                                 >
-                                    ✅ Complete Payment
+                                    Complete Payment
                                 </motion.button>
                             </div>
                         </>

@@ -14,7 +14,7 @@ const Cart = () => {
         fetchCartItems();
     }, []);
 
-    // ✅ ฟังก์ชันดึงข้อมูลสินค้าในตะกร้า
+    //ฟังก์ชันดึงข้อมูลสินค้าในตะกร้า
     const fetchCartItems = async () => {
         try {
             const response = await axios.get("http://localhost:5000/api/cart", {
@@ -23,11 +23,11 @@ const Cart = () => {
             if (response.data.cart.length > 0) {
                 setCartItems(response.data.cart);
             } else {
-                setError("❌ No items in cart.");
+                setError("No items in cart.");
             }
         } catch (err) {
-            console.error("❌ Fetch Cart Error:", err);
-            setError("❌ Failed to fetch cart items.");
+            console.error("Fetch Cart Error:", err);
+            setError("Failed to fetch cart items.");
         }
     };
 
@@ -41,20 +41,20 @@ const Cart = () => {
             });
 
             if (response.data.status === "success") {
-                alert("✅ Item removed from cart!");
+                alert("Item removed from cart!");
                 setCartItems(cartItems.filter(item => item.CartID !== cartID));
             } else {
-                setError("❌ Failed to remove item.");
+                setError("Failed to remove item.");
             }
         } catch (err) {
-            console.error("❌ Delete Cart Error:", err);
-            setError("❌ Error removing item from cart.");
+            console.error("Delete Cart Error:", err);
+            setError("Error removing item from cart.");
         }
     };
 
     // ✅ ฟังก์ชันลบสินค้าทั้งหมดออกจากตะกร้า
     const handleRemoveAll = async () => {
-        if (!window.confirm("⚠️ Are you sure you want to remove all items from the cart?")) return;
+        if (!window.confirm("Are you sure you want to remove all items from the cart?")) return;
 
         try {
             const response = await axios.delete("http://localhost:5000/api/cart", {
@@ -62,21 +62,21 @@ const Cart = () => {
             });
 
             if (response.data.status === "success") {
-                alert("✅ All items removed from cart!");
+                alert("All items removed from cart!");
                 setCartItems([]); // อัปเดต UI ให้ตะกร้ากลายเป็นว่าง
             } else {
-                setError("❌ Failed to remove all items.");
+                setError("Failed to remove all items.");
             }
         } catch (err) {
-            console.error("❌ Remove All Error:", err);
-            setError("❌ Error removing all items.");
+            console.error("Remove All Error:", err);
+            setError("Error removing all items.");
         }
     };
 
-    // ✅ ฟังก์ชัน Checkout สร้างออเดอร์ใหม่ใน SQL และลบตะกร้า
+    //ฟังก์ชัน Checkout สร้างออเดอร์ใหม่ใน SQL และลบตะกร้า
     const handleCheckout = async () => {
         if (cartItems.length === 0) {
-            alert("❌ Your cart is empty!");
+            alert("Your cart is empty!");
             return;
         }
 
@@ -90,33 +90,33 @@ const Cart = () => {
         };
 
         try {
-            // ✅ 1. สร้างคำสั่งซื้อ (Order)
+            // 1. สร้างคำสั่งซื้อ (Order)
             const orderResponse = await axios.post("http://localhost:5000/api/orders", orderData, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
             if (orderResponse.data.status === "success") {
-                console.log("✅ Order created successfully:", orderResponse.data);
+                console.log("Order created successfully:", orderResponse.data);
 
-                // ✅ 2. ลบสินค้าทั้งหมดจากตะกร้า (Cart)
+                //  2. ลบสินค้าทั้งหมดจากตะกร้า (Cart)
                 const deleteResponse = await axios.delete("http://localhost:5000/api/cart", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
                 if (deleteResponse.data.status === "success") {
-                    console.log("🛒 Cart cleared successfully");
+                    console.log("Cart cleared successfully");
                     setCartItems([]); // เคลียร์ตะกร้า
-                    alert(`✅ Order placed successfully! Order ID: ${orderResponse.data.OrderID}`);
+                    alert(`Order placed successfully! Order ID: ${orderResponse.data.OrderID}`);
                     navigate(`/orders?id=${orderResponse.data.OrderID}`);
                 } else {
-                    alert("❌ Failed to clear cart items.");
+                    alert("Failed to clear cart items.");
                 }
             } else {
-                alert("❌ Failed to create order.");
+                alert("Failed to create order.");
             }
         } catch (err) {
-            console.error("❌ Checkout Error:", err);
-            setError("❌ Error during checkout.");
+            console.error("Checkout Error:", err);
+            setError("Error during checkout.");
         }
     };
 
@@ -169,7 +169,7 @@ const Cart = () => {
                                             onClick={() => handleDelete(item.CartID)}
                                             style={styles.button}
                                         >
-                                            ❌ Remove
+                                            Remove
                                         </motion.button>
                                     </td>
                                 </motion.tr>
@@ -189,7 +189,7 @@ const Cart = () => {
                     onClick={() => navigate("/products")}
                     style={styles.buttonSecondary}
                 >
-                    🔙 Back to Products
+                    Back to Products
                 </motion.button>
 
                 {/* ปุ่ม Remove All (กลาง) */}
@@ -200,7 +200,7 @@ const Cart = () => {
                     onClick={handleRemoveAll}
                     style={styles.buttonWarning}
                 >
-                    🗑 Remove All
+                    Remove All
                 </motion.button>
 
                 {/* ปุ่ม Checkout (ขวา) */}
@@ -211,7 +211,7 @@ const Cart = () => {
                     onClick={handleCheckout}
                     style={styles.buttonSuccess}
                 >
-                    💳 Checkout
+                    Checkout
                 </motion.button>
             </div>
         </motion.div>

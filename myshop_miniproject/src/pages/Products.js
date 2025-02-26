@@ -30,7 +30,7 @@ const Products = () => {
             const cartData = { 
                 ProductID: product.ProductID, 
                 Quantity: selectedQuantity, 
-                CustomerID: 4 // เปลี่ยนเป็นค่าที่ดึงจาก Auth ได้ถ้าต้องการ
+                CustomerID: 1 // เปลี่ยนเป็นค่าที่ดึงจาก Auth ได้ถ้าต้องการ
             };
 
             console.log("📦 Adding to Cart:", cartData);
@@ -42,8 +42,8 @@ const Products = () => {
             );
 
             if (response.data.status === "success") {
-                setSuccess("✅ Item added to cart!");
-                setTimeout(() => navigate("/cart"), 1000); // ✅ นำทางไปยัง Cart หลังจากเพิ่มสำเร็จ
+                setSuccess("Item added to cart!");
+                setTimeout(() => navigate("/cart"), 1000); // นำทางไปยัง Cart หลังจากเพิ่มสำเร็จ
             } else {
                 setError("❌ Failed to add item to cart.");
             }
